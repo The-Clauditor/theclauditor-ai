@@ -1,0 +1,94 @@
+<!--PAGE
+title: Proof — The Clauditor
+description: The standard we hold our own site and mail to, how to check it yourself, and where the site's source lives.
+path: /proof/
+body_class: page-proof
+-->
+<main id="main">
+
+<section class="hero">
+  <div class="wrap flow">
+    <p class="kicker">Proof</p>
+    <h1>The standard, and how to check it.</h1>
+    <p class="lede">We hold this site and our own mail to the checklist we bring to yours. Everything below is public. Nothing here asks you to trust us.</p>
+  </div>
+</section>
+
+<section aria-labelledby="site">
+  <div class="wrap flow">
+    <h2 class="kicker" id="site"><span class="no">01</span> · This site</h2>
+    <ul>
+      <li>Every connection to this site is encrypted, and browsers are told to insist on it for a year, subdomains included (HSTS).</li>
+      <li>The page may run no code except its own and loads nothing from anyone else — not a font, not a script, not an image. A Content Security Policy enforces it, and forbids any other site from framing this one.</li>
+      <li>No cookies, no trackers, no third-party requests. Nothing you do here is reported to anyone.</li>
+      <li>If you choose light or dark, that choice is kept in your own browser and is never sent anywhere.</li>
+      <li>The site is static files on a content-delivery network: there is no server of ours to break into and no database behind the pages.</li>
+      <li>The fonts are served from here, under the SIL Open Font License.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="mail">
+  <div class="wrap flow">
+    <h2 class="kicker" id="mail"><span class="no">02</span> · Our mail</h2>
+    <ul>
+      <li>Mail from theclauditor.ai is signed (DKIM) and policed (SPF and DMARC), so a receiver can tell forged mail from ours.</li>
+      <li>Other mail servers are given a published policy for delivering to us over encrypted connections (MTA-STS, in its testing phase) and asked to report any failure (TLS-RPT).</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="domain">
+  <div class="wrap flow">
+    <h2 class="kicker" id="domain"><span class="no">03</span> · Our domain</h2>
+    <ul>
+      <li>Only the certificate authorities we name may issue certificates for our domain (CAA).</li>
+      <li>Our DNS answers are signed, so they cannot be quietly swapped on the way to you (DNSSEC).</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="report">
+  <div class="wrap flow">
+    <h2 class="kicker" id="report"><span class="no">04</span> · If you find something</h2>
+    <p>A <a href="/.well-known/security.txt">security.txt</a> file tells researchers where to report a problem, with a <a href="/.well-known/pgp-key.txt">PGP key</a> for the conversation and a <a href="/security-policy/">written policy</a> behind it — including a safe-harbor promise.</p>
+  </div>
+</section>
+
+<section aria-labelledby="source">
+  <div class="wrap flow">
+    <h2 class="kicker" id="source"><span class="no">05</span> · The source is public</h2>
+    <p>The source of this site — every page, the stylesheet, the fonts, the build and check scripts, and the scan that re-reads the live headers — is a public repository: <a href="https://github.com/The-Clauditor/theclauditor-ai">github.com/The-Clauditor/theclauditor-ai</a>. Commits are signed. On every change, and on a schedule, a public workflow rebuilds the site, checks it against the rules on this page, and scans the live site's headers, mail and DNS records; the <a href="https://github.com/The-Clauditor/theclauditor-ai/actions">log of each run</a> is public.</p>
+    <p>A change in the repository does not deploy anything. The site is published by hand, by its owner, from a build whose checks have passed.</p>
+    <p>The assessment methodology itself is not in that repository. It stays private, available to a reviewer on request.</p>
+  </div>
+</section>
+
+<section aria-labelledby="practitioner">
+  <div class="wrap flow">
+    <h2 class="kicker" id="practitioner"><span class="no">06</span> · The practitioner</h2>
+    <p><!--SP:WITH-->CompTIA Security+ (ce) — earned June 2026, valid through June 2029. <a href="{{SECURITYPLUS_URL}}">Verify it</a>.<!--/SP:WITH--><!--SP:WITHOUT-->CompTIA Security+ (ce) — earned June 2026, valid through June 2029.<!--/SP:WITHOUT--></p>
+  </div>
+</section>
+
+<section aria-labelledby="scan">
+  <div class="wrap flow">
+    <h2 class="kicker" id="scan"><span class="no">07</span> · Run your own scan</h2>
+    <p><strong>Run your own scan on my site and my mail:</strong> <a href="https://securityheaders.com/?q=theclauditor.ai&amp;followRedirects=on">Security Headers</a> · <a href="https://developer.mozilla.org/en-US/observatory/analyze?host=theclauditor.ai">Mozilla HTTP Observatory</a> · <a href="https://www.ssllabs.com/ssltest/analyze.html?d=theclauditor.ai">SSL Labs</a> · <a href="https://mxtoolbox.com/SuperTool.aspx?action=dmarc%3atheclauditor.ai&amp;run=toolpage">MXToolbox — DMARC</a> · <a href="https://mxtoolbox.com/SuperTool.aspx?action=mta-sts%3atheclauditor.ai&amp;run=toolpage">MXToolbox — MTA-STS</a></p>
+    <p>The results are the scanners' own, not ours.</p>
+  </div>
+</section>
+
+<section aria-labelledby="noclaim">
+  <div class="wrap flow">
+    <h2 class="kicker" id="noclaim"><span class="no">08</span> · What we don't claim</h2>
+    <ul>
+      <li>No certification beyond the one above. No SOC 2, no ISO 27001 — a one-person practice doesn't carry them, and we won't pretend to.</li>
+      <li>No guarantee. A clean scan today is a picture of today.</li>
+      <li>No client names, no testimonials. The work we do for others is confidential, and it isn't marketing.</li>
+      <li>No affiliation with Anthropic, whose Claude we use as a tool.</li>
+    </ul>
+  </div>
+</section>
+
+</main>

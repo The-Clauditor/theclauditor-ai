@@ -1,0 +1,73 @@
+# site-check - the public check for theclauditor.ai.
+#   static: build the site from src/ and check it against the rules (tools/check_site.py).
+#           The build carries the public Credly link for the owner's Security+ certification,
+#           as the deployed site does, so this build reproduces the deployed bytes.
+#   live:   read the live site's headers, TLS, mail and DNS records (tools/scan_live.sh);
+#           any FAIL line fails the job.
+# Runs on every push to main, on every pull request, every Monday at 15:00 UTC, and by hand.
+# No secrets, no tokens, no third-party actions; the two GitHub actions are pinned by commit SHA.
+# This workflow deploys nothing: the site is published by hand, by its owner.
+# Note: in a public repository GitHub disables scheduled workflows after 60 days with no
+# repository activity. Push a commit, or re-enable the workflow from the Actions page.
+name: site-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 15 * * 1'
+  workflow_dispatch:
+    inputs:
+      live:
+        description: 'Also scan the live site (turn off only before the first deploy of this source)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: What this job does
+        run: echo "build the site and check it against the rules"
+      - name: Check out the source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build
+        run: python3 -B tools/build.py --src src --dest dist --build-date "$(date -u +%F)" --securityplus-url https://www.credly.com/badges/c3350891-402b-495b-b6ec-a752ffbb2bcb
+      - name: Check
+        run: python3 -B tools/check_site.py --dist dist --securityplus-url https://www.credly.com/badges/c3350891-402b-495b-b6ec-a752ffbb2bcb
+
+  live:
+    needs: static
+    if: github.event_name != 'workflow_dispatch' || inputs.live
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: What this job does
+        run: echo "read the live site's headers, TLS, mail and DNS records"
+      - name: Check out the source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Scan the live site
+        run: |
+          set +e
+          bash tools/scan_live.sh --out scan-live.txt > /dev/null
+          rc=$?
+          cat scan-live.txt
+          # A check line reads "Lnn FAIL — ..."; the TOTAL line always contains "FAIL", so it is not matched.
+          if grep -qE '^L[0-9]+ FAIL ' scan-live.txt || [ "$rc" -ne 0 ]; then exit 1; fi
+      - name: Keep the scan as a downloadable file
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: scan-live
+          path: scan-live.txt
+          if-no-files-found: error
+          retention-days: 90

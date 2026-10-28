@@ -1,0 +1,203 @@
+<!--PAGE
+title: Sample report — The Clauditor
+description: What a Clauditor Security Snapshot and assessment report look like — a worked sample for a fictional firm.
+path: /sample-report/
+body_class: page-sample
+-->
+<main id="main">
+
+<section class="hero">
+  <div class="wrap flow">
+    <p class="banner"><strong>SAMPLE — Alder &amp; Finch Bookkeeping is a fictional firm. Every finding, name and number on this page is illustrative. Real reports are confidential and prepared for one client.</strong></p>
+    <p class="kicker">Sample report</p>
+    <h1>What you'd actually get.</h1>
+    <p class="lede">Every assessment ends with two documents: a one-page Security Snapshot you can read in ninety seconds, and a full report with the evidence behind it. Below is the Snapshot for a made-up two-person bookkeeping firm, followed by an excerpt from its website findings — the structure, the tone, and how honestly things are rated.</p>
+  </div>
+</section>
+
+<section aria-labelledby="snapshot">
+  <div class="wrap">
+    <article class="doc">
+      <h2 id="snapshot">Security Snapshot — Alder &amp; Finch Bookkeeping</h2>
+      <p class="meta"><strong>Prepared for:</strong> Alder &amp; Finch Bookkeeping (fictional) · <strong>Contact:</strong> M. Alder, owner<br>
+<strong>Prepared by:</strong> Bryan, The Clauditor · <strong>Date:</strong> 2026-10-20 (sample)<br>
+<strong>Assessment window:</strong> 2026-10-13 to 2026-10-17 (sample) · <strong>Authorization:</strong> AUTH-SAMPLE-001, signed 2026-10-10 (sample)</p>
+
+      <h3>The short version</h3>
+      <p>We looked at the firm's public footprint (alderfinch.example and its mail), the website, the two Macs and two phones the partners work from, and the accounts behind them. Overall, Alder &amp; Finch is in <strong>fair</strong> shape: a reputable mail provider and encrypted laptops are already in place, and nothing we found puts money or client files at immediate risk. The single most important thing to do first is <strong>turn on hardware security keys for the two Google accounts and the recovery address behind them</strong> — the firm's client files, mail and bank sign-ins all hang off those accounts.</p>
+      <p>Below is what's already working, the handful of things worth fixing, and where we'd start.</p>
+
+      <h3>What's strong</h3>
+      <ul>
+        <li><strong>Mail runs on Google Workspace with two-step verification on both partner accounts</strong> — the single biggest protection a small firm can have is already on.</li>
+        <li><strong>Both laptops are encrypted (FileVault) and on the current macOS</strong> — a lost laptop is an inconvenience, not a breach.</li>
+        <li><strong>The website is served over HTTPS only, with a current certificate and TLS 1.3</strong>, and no exposed backup, configuration or source-control files were found.</li>
+      </ul>
+
+      <h3>Top things to fix</h3>
+      <div class="table-wrap">
+        <table class="findings">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">What to fix</th>
+              <th scope="col">Severity</th>
+              <th scope="col">Effort</th>
+              <th scope="col">The one-line fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mail can be forged to look like it's from alderfinch.example (DMARC is published with no enforcement)</td>
+              <td>High</td>
+              <td>Quick</td>
+              <td>Move DMARC to quarantine, then reject, after a two-week read of the reports — we set it up and read them with you.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>The partners' second factor is a text message, and the recovery address is a personal mailbox with no second factor</td>
+              <td>High</td>
+              <td>Moderate</td>
+              <td>Enroll hardware security keys on both Workspace accounts and the recovery mailbox; retire text-message codes.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>A bookkeeping add-on the firm stopped using in 2025 still holds read/write access to the firm's Google Drive</td>
+              <td>High</td>
+              <td>Quick</td>
+              <td>Revoke the grant in the Workspace admin console — minutes — and review the rest once a year.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>The website's contact form collects personal details on a page without browser-protection headers (no HSTS, no Content Security Policy, no frame protection)</td>
+              <td>Medium</td>
+              <td>Quick</td>
+              <td>Add the standard security-header set at the host — a one-time change we make and verify.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>The only backup of the firm's working files is the sync folder itself — a deletion or a ransomware event would sync to every copy</td>
+              <td>Medium</td>
+              <td>Moderate</td>
+              <td>Add a versioned, encrypted off-site backup that keeps 30 days of history, and test a restore.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Severity &amp; effort, in plain terms</h3>
+      <div class="table-wrap">
+        <table class="findings">
+          <thead>
+            <tr>
+              <th scope="col">Severity</th>
+              <th scope="col">What it means</th>
+              <th scope="col">Effort</th>
+              <th scope="col">What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Critical</strong></td>
+              <td>Act now — money/identity at direct risk</td>
+              <td><strong>Quick</strong></td>
+              <td>Minutes; often we do it on the spot</td>
+            </tr>
+            <tr>
+              <td><strong>High</strong></td>
+              <td>This week</td>
+              <td><strong>Moderate</strong></td>
+              <td>About an hour or a guided session</td>
+            </tr>
+            <tr>
+              <td><strong>Medium</strong></td>
+              <td>This month</td>
+              <td><strong>Project</strong></td>
+              <td>Ongoing or needs a vendor</td>
+            </tr>
+            <tr>
+              <td><strong>Low</strong></td>
+              <td>This quarter</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>Info</strong></td>
+              <td>Good to know</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Your next step</h3>
+      <p>A two-hour remediation session: we enroll the keys, revoke the stale grant and set DMARC to quarantine together, then schedule the header change and the backup. We can do the work for you, walk you through it, or hand you a checklist — your call.</p>
+
+      <p class="foot">The Clauditor · theclauditor.ai · Confidential — prepared for Alder &amp; Finch Bookkeeping · 2026-10-20 (sample)</p>
+      <p class="foot">This snapshot summarizes a fuller assessment. The complete findings, evidence, and the scope and authorization on which they rest are in the full report. It reflects the systems in scope during the assessment window; it is a point-in-time picture, not a guarantee of future security.</p>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="excerpt">
+  <div class="wrap flow">
+    <h2 id="excerpt">From the full report: two website findings</h2>
+    <p>The full report carries, for each finding: what it is, what we found (the evidence), why it matters, the fix, severity, effort, and the OWASP Top 10:2025 category. Two rows from the sample:</p>
+    <div class="table-wrap">
+      <table class="findings wide">
+        <thead>
+          <tr>
+            <th scope="col">Finding</th>
+            <th scope="col">What it is</th>
+            <th scope="col">What we found (evidence)</th>
+            <th scope="col">Why it matters</th>
+            <th scope="col">Severity</th>
+            <th scope="col">Effort</th>
+            <th scope="col">Recommended fix</th>
+            <th scope="col">OWASP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Missing security headers</strong></td>
+            <td>Standard HTTP headers that tell the browser how to protect your visitors</td>
+            <td><code>curl -sI https://alderfinch.example/</code> shows no Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options or frame-ancestors (sample evidence)</td>
+            <td>Leaves visitors more exposed to script injection, clickjacking and downgrade attacks; cheap to fix</td>
+            <td><strong>Medium</strong></td>
+            <td><strong>Quick</strong></td>
+            <td>Add the security-header set at the host; we make the change and verify it.</td>
+            <td>A02</td>
+          </tr>
+          <tr>
+            <td><strong>Verbose version banners</strong></td>
+            <td>Server and framework version strings advertised in responses</td>
+            <td><code>Server: Apache/2.4.x · X-Powered-By: PHP/8.x</code> (sample evidence)</td>
+            <td>Helps an attacker match your software to known exploits</td>
+            <td><strong>Low</strong></td>
+            <td><strong>Quick</strong></td>
+            <td>Suppress the server tokens and the X-Powered-By header.</td>
+            <td>A02</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="method">Scope &amp; method (sample)</h2>
+    <p><strong>What we assessed.</strong> The website at alderfinch.example: server and stack fingerprint, TLS posture, HTTP security headers, cookies, exposed sensitive files, content-system posture, the contact form and the personal data it collects, and third-party trackers — against OWASP Top 10:2025, ASVS 5.0 and WSTG.</p>
+    <p><strong>How we assessed it.</strong> A passive-first pass over what the site already serves to the public, followed — only inside the signed authorization — by authorization-gated path checks and an active TLS scan, tagged as such in the evidence. We read; we did not exploit.</p>
+    <p><strong>What we did not assess.</strong> The bookkeeping platform itself (a vendor's system), the bank portals, and any host not named in the authorization.</p>
+    <p><strong>Authorization.</strong> AUTH-SAMPLE-001, signed by M. Alder, naming alderfinch.example and the four devices. No system outside that scope was probed.</p>
+    <p><strong>Evidence &amp; retention.</strong> Redacted header blocks and status lines — never a secret, a token or real personal data — held in the engagement's encrypted store for 90 days after delivery, then destroyed.</p>
+    <p>What a real report has that this sample doesn't: the evidence exhibits (redacted screenshots and command output), the full findings list, and the client's own strengths — which are always specific, never "good job".</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="banner"><strong>SAMPLE — Alder &amp; Finch Bookkeeping is a fictional firm. Every finding, name and number on this page is illustrative. Real reports are confidential and prepared for one client.</strong></p>
+  </div>
+</section>
+
+</main>

@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- og-card.html - the 1200x630 share card, rendered once to src/static/assets/og.jpg.
+     A tool, not a site page: its own style block is allowed here, and it never ships.
+     Serve this file beside a copy of src/static/fonts/ and screenshot it at 1200x630. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og card</title>
+<style>
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;
+  src:url(/fonts/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjnTLgNs.woff2) format("woff2")}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:700;
+  src:url(/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2) format("woff2")}
+@font-face{font-family:"Space Mono";font-style:normal;font-weight:400;
+  src:url(/fonts/i7dPIFZifjKcF5UAWdDRYEF8RXi4EwQ.woff2) format("woff2")}
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#F4F1EC;color:#0A0B0C}
+.card{box-sizing:border-box;width:1200px;height:630px;padding:76px 88px 72px;
+  display:flex;flex-direction:column;justify-content:space-between}
+.mark{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:34px;letter-spacing:.01em}
+h1{margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-size:78px;line-height:1.08;
+  letter-spacing:.005em;max-width:960px;text-wrap:balance}
+.url{font-family:"Space Mono",monospace;font-size:26px;color:#5D5850;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="mark">The Clauditor</div>
+  <h1>Digital security and digital succession for small businesses and families.</h1>
+  <div class="url">theclauditor.ai</div>
+</div>
+</body>
+</html>
