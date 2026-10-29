@@ -219,9 +219,9 @@ except Exception: print("not JSON")' "$HP.s")"
     { [ "$(code "$h" /about)" = "308" ] && { [ "$loc" = "/about/" ] || [ "$loc" = "https://$h/about/" ]; }; } || bad="$bad $h/about=$(code "$h" /about)->$loc"
     k="$(key "$h" /nope-404-test)"
     { [ "$(code "$h" /nope-404-test)" = "404" ] && grep -q '<title>Not found — The Clauditor</title>' "$TMP/$k.b"; } || bad="$bad $h/nope-404-test=$(code "$h" /nope-404-test)"
-    [ "$(code "$h" /404.html)" = "200" ] || bad="$bad $h/404.html=$(code "$h" /404.html)"
+    case "$(code "$h" /404.html)" in 200|308) ;; *) bad="$bad $h/404.html=$(code "$h" /404.html)";; esac
   done
-  if [ -z "$bad" ]; then emit L15 PASS "[GATE] 8 pages 200 on both hosts; /about 308 -> /about/; /nope-404-test 404 with the custom page; /404.html 200"
+  if [ -z "$bad" ]; then emit L15 PASS "[GATE] 8 pages 200 on both hosts; /about 308 -> /about/; /nope-404-test 404 with the custom page; /404.html 200 or 308 (Pages drops .html)"
   else emit L15 FAIL "[GATE] pages:$bad"; fi
 
   files=""; for h in $HOSTS; do for p in $PAGES /404.html /assets/site.css; do files="$files $TMP/$(key "$h" "$p").b"; done; done
